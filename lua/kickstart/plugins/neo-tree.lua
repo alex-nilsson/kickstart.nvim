@@ -15,6 +15,10 @@ return {
   },
   opts = {
     filesystem = {
+      filtered_items = {
+        visible = true,
+      },
+      tabs_layout = 'equal',
       window = {
         mappings = {
           ['\\'] = 'close_window',
