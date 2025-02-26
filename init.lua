@@ -415,9 +415,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>se', function()
-        builtin.grep_string { search = vim.fn.input 'Search in files for >' }
-      end)
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -634,7 +631,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
         --
-
+        omnisharp = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -722,6 +719,7 @@ require('lazy').setup({
         typescript = { 'prettierd' },
         javascript = { 'prettierd' },
         html = { 'prettierd' },
+        csharp = { 'csharpier' },
 
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -946,8 +944,10 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.debug',
 
   require 'custom.plugins.bufferline',
+  require 'custom.plugins.toggleterm',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

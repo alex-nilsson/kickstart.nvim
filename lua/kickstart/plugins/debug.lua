@@ -5,7 +5,8 @@
 -- Primarily focused on configuring the debugger for Go, but can
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
-
+local HOME = os.getenv 'HOME'
+local DEBUGGER_LOCATION = 'c:\\Users\\anils122\\AppData\\Local\\nvim\\netcoredbg'
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -23,6 +24,8 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'iabdelkareem/csharp.nvim',
+    'Tastyep/structlog.nvim',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -136,6 +139,12 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    dap.adapters.coreclr = {
+      type = 'executable',
+      command = DEBUGGER_LOCATION .. '\\netcoredbg',
+      args = { '--interpreter=vscode' },
+    }
+
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
@@ -144,5 +153,7 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    require('csharp').setup()
   end,
 }
