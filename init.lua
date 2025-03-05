@@ -106,7 +106,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -623,7 +623,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -719,9 +719,12 @@ require('lazy').setup({
         }
       end,
       formatters_by_ft = {
+        cpp = { 'clang_format' },
         lua = { 'stylua' },
-        typescript = { 'prettierd' },
-        javascript = { 'prettierd' },
+        typescript = { 'prettierd', 'prettier' },
+        javascript = { 'prettierd', 'prettier' },
+        javascriptreact = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
         html = { 'prettierd' },
         csharp = { 'csharpier' },
 
@@ -950,11 +953,15 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   require 'custom.plugins.bufferline',
   require 'custom.plugins.toggleterm',
   require 'custom.plugins.copilot',
   require 'custom.plugins.autotag',
+  require 'custom.plugins.betterterm',
+  require 'custom.plugins.code_runner',
+
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

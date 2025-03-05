@@ -139,11 +139,16 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    dap.adapters.coreclr = {
+    dap.adapters.cppdbg = {
+      id = 'cppdbg',
       type = 'executable',
-      command = DEBUGGER_LOCATION .. '\\netcoredbg',
-      args = { '--interpreter=vscode' },
+      command = '/Users/alex/.vscode/extensions/ms-vscode.cpptools-1.23.6-darwin-arm64/debugAdapters/bin/OpenDebugAD7',
     }
+
+    dap.adapters.c = dap.adapters.cppdbg
+    dap.adapters.cpp = dap.adapters.cppdbg
+
+    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, python = { 'python' } })
 
     -- Install golang specific config
     require('dap-go').setup {
