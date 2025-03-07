@@ -6,6 +6,11 @@ return {
   },
   config = function()
     require('code_runner').setup {
+      mode = 'float',
+      float = {
+        border = 'double',
+      },
+      startinsert = true,
       filetype = {
         java = {
           'cd $dir &&',
@@ -21,7 +26,7 @@ return {
         },
         cpp = {
           'cd $dir &&',
-          'clang++ $fileName -o /tmp/$fileNameWithoutExt &&',
+          'clang++ $fileName -std=c++14 -o /tmp/$fileNameWithoutExt &&',
           '/tmp/$fileNameWithoutExt &&',
           'rm /tmp/$fileNameWithoutExt',
         },
