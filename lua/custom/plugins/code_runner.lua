@@ -5,6 +5,16 @@ return {
     'CRAG666/code_runner.nvim',
   },
   config = function()
+    local start_command = 'clang++ '
+    local remove_command = 'rm'
+    local file_to_remove = ' /tmp/$fileNameWithoutExt'
+
+    if vim.fn.has 'win32' then
+      start_command = 'g++'
+      remove_command = 'del /F'
+      file_to_remove = ' \\tmp\\$fileNameWithoutExt.exe'
+    end
+
     require('code_runner').setup {
       mode = 'float',
       float = {
@@ -26,9 +36,11 @@ return {
         },
         cpp = {
           'cd $dir &&',
-          'clang++ $fileName -std=c++14 -o /tmp/$fileNameWithoutExt &&',
+          start_command,
+          ' $fileName -std=c++14 -o /tmp/$fileNameWithoutExt &&',
           '/tmp/$fileNameWithoutExt &&',
-          'rm /tmp/$fileNameWithoutExt',
+          remove_command,
+          file_to_remove,
         },
       },
     }
