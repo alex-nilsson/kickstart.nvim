@@ -9,7 +9,7 @@ return {
     local remove_command = 'rm'
     local file_to_remove = ' /tmp/$fileNameWithoutExt'
 
-    if vim.fn.has 'win32' and not vim.fn.has 'mac' then
+    if vim.fn.has 'win32' == 1 then
       start_command = 'g++'
       remove_command = 'del /F'
       file_to_remove = ' \\tmp\\$fileNameWithoutExt.exe'
