@@ -5,8 +5,7 @@
 -- Primarily focused on configuring the debugger for Go, but can
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
-local HOME = os.getenv 'HOME'
-local DEBUGGER_LOCATION = 'c:\\Users\\anils122\\AppData\\Local\\nvim\\netcoredbg'
+
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -24,8 +23,6 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
-    'iabdelkareem/csharp.nvim',
-    'Tastyep/structlog.nvim',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -139,17 +136,6 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    dap.adapters.cppdbg = {
-      id = 'cppdbg',
-      type = 'executable',
-      command = '/Users/alex/.vscode/extensions/ms-vscode.cpptools-1.23.6-darwin-arm64/debugAdapters/bin/OpenDebugAD7',
-    }
-
-    dap.adapters.c = dap.adapters.cppdbg
-    dap.adapters.cpp = dap.adapters.cppdbg
-
-    require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' }, python = { 'python' } })
-
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
@@ -158,7 +144,5 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
-
-    require('csharp').setup()
   end,
 }
