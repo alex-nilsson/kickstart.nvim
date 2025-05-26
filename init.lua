@@ -404,7 +404,22 @@ require('lazy').setup({
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'javascript', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'typescript', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'c_sharp',
+        'diff',
+        'html',
+        'javascript',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'typescript',
+        'vim',
+        'vimdoc',
+      },
       auto_install = true,
       highlight = {
         enable = true,
@@ -422,6 +437,8 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns',
 
   require 'custom.plugins.code-runner',
+  require 'custom.plugins.dotnet',
+  require 'custom.plugins.betterterm',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
